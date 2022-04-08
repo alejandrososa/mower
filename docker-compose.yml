@@ -1,0 +1,22 @@
+version: "3"
+
+networks:
+  red:
+    driver: bridge
+    driver_opts:
+      com.docker.network.driver.mtu: 1400
+
+volumes:
+  php:
+    driver: local
+
+services:
+  php:
+    build:
+      context: ./docker/php
+      args:
+        TIMEZONE: Europe/Madrid
+    volumes:
+      - ./:/var/www/app/
+    networks:
+      - red
